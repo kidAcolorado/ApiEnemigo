@@ -57,6 +57,7 @@ public class Enemigo {
 
 	public Enemigo() {
 		super();
+		
 	}
 
 	public int getIdEnemigo() {

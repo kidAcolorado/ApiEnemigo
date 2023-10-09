@@ -157,9 +157,11 @@ public class EnemigoServiceImpl implements EnemigoService {
 
 		Enemigo enemigo = optionalEnemigo.get();
 
-		enemigo.setVidaActual(enemigo.getVidaActual() - damage);
+		int vidaActual = enemigo.getVidaActual();
+		
+		enemigo.setVidaActual(vidaActual - damage);
 
-		if (enemigo.getVidaActual() <= 0) {
+		if (vidaActual <= 0) {
 			enemigo.setVencido(true);
 		}
 

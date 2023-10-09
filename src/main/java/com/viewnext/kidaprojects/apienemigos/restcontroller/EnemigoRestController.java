@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.viewnext.kidaprojects.apienemigos.model.Enemigo;
@@ -102,8 +103,8 @@ public class EnemigoRestController {
 	 * @return ResponseEntity que contiene una lista de enemigos si se encuentran, o
 	 *         un mensaje de error si no se encuentran enemigos.
 	 */
-	@GetMapping(value = "enemigo/nombre/{prefijo}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> showEnemigosByNombreLike(@PathVariable("prefijo") String prefijo) {
+	@GetMapping(value = "enemigo/nombre", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> showEnemigosByNombreLike(@RequestParam("prefijo") String prefijo) {
 		try {
 			List<Enemigo> listaEnemigos = service.showByNombreLike(prefijo);
 			return ResponseEntity.ok(listaEnemigos);
@@ -120,8 +121,8 @@ public class EnemigoRestController {
 	 * @return ResponseEntity que contiene una lista de enemigos si se encuentran, o
 	 *         un mensaje de error si no se encuentran enemigos.
 	 */
-	@GetMapping(value = "enemigo/nivel/{nivel}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> showEnemigosByNivel(@PathVariable("nivel") int nivel) {
+	@GetMapping(value = "enemigo/nivel", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> showEnemigosByNivel(@RequestParam("nivel") int nivel) {
 
 		try {
 			List<Enemigo> listaEnemigos = service.showByNivel(nivel);
@@ -159,9 +160,9 @@ public class EnemigoRestController {
 	 * @return ResponseEntity que contiene el enemigo actualizado o un mensaje de
 	 *         error si el enemigo no se encuentra.
 	 */
-	@PutMapping(value = "enemigo/{idEnemigo}/{damage}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "enemigo/{idEnemigo}/damage", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateVidaEnemigo(@PathVariable("idEnemigo") int idEnemigo,
-			@PathVariable("damage") int damage) {
+			@RequestParam("damage") int damage) {
 		try {
 			Enemigo enemigoActualizado = service.updateVida(idEnemigo, damage);
 			return ResponseEntity.ok(enemigoActualizado);
